@@ -3,7 +3,7 @@
         Course on Advanced Programming for Scientific Computing
                       Politecnico di Milano
                           A.Y. 2015-2016
-                  
+
          Copyright (C) 2017 Ilaria Speranza & Mattia Tantardini
 ======================================================================*/
 /*
@@ -40,9 +40,9 @@ namespace BGLgeom{
 
 /*!
 	@brief	Abstract class for an edge
-	
+
 	It specifies all the geometric operation that should be carried
-	out on an edge, thought as a curve in the space (2 or 3 dimensional). 
+	out on an edge, thought as a curve in the space (2 or 3 dimensional).
 	In particular, it defines, for a given value of the parameter: \n
 	- evaluation of the curve; \n
 	- evaluation of the first derivative; \n
@@ -62,71 +62,74 @@ class edge_geometry {
 	public:
 		/*!
 			@brief Overload of the calling operator
-			
-			This represents the evaluation of the curve at a given value of 
+
+			This represents the evaluation of the curve at a given value of
 			the parameter
 			@return A point in the dim-dimensional space.
 		*/
 		virtual BGLgeom::point<dim>
 		operator() (double const&) const = 0;
-		
+
 		//! The same as before, but with evaluation on a vector of parameters
 		virtual std::vector<BGLgeom::point<dim>>
 		operator() (std::vector<double> const&) const = 0;
-		
+
+		// Cloning pattern
+		virtual edge_geometry* clone() const = 0;
+
 		/*!
 			@brief First derivative of the curve
-			
+
 			It evaluates each component of the first derivative of the curve
 			at a given value of the parameter
 			@return An Eigen matrix containing the three components of the evaluation.
-					We use again as return value a BGLgeom:point<dim>, since the 
+					We use again as return value a BGLgeom:point<dim>, since the
 					underlying container is the same
 		*/
 		virtual BGLgeom::point<dim>
 		first_der (double const&) const = 0;
-		
+
 		//! The same as before, but with evaluation on a vector of parameters
 		virtual std::vector<BGLgeom::point<dim>>
 		first_der (std::vector<double> const&) const = 0;
-		
+
 		/*!
 			@brief Second derivative of the curve
-			
+
 			It evaluates each component of the second derivative of the curve
 			at a given value of the parameter
 			@return An Eigen matrix containing the three components of the evaluation.
-					We use again as return value a BGLgeom:point<dim>, since the 
+					We use again as return value a BGLgeom:point<dim>, since the
 					underlying container is the same
 		*/
 		virtual BGLgeom::point<dim>
 		second_der (double const&) const = 0;
-		
+
 		//! The same as before, but with evaluation on a vector of parameters
 		virtual std::vector<BGLgeom::point<dim>>
 		second_der (std::vector<double> const&) const = 0;
-		
+
 		/*!
 			@brief Curvilinear abscissa of the curve
-			
+
 			It evaluates the curvilinear abscissa of the curve at a given
 			value of the parameter
 		*/
 		virtual double
 		curv_abs (double const&) const = 0;
-		
+
 		//! The same as before, but with evaluation on a vector of parameters
 		virtual std::vector<double>
 		curv_abs (std::vector<double> const&) const = 0;
-		
+
 		/*!
 			@brief Curvature of the curve
-			
+
 			It evaluates the curvature at a given value of the parameter
 		*/
 		virtual double
 		curvature (double const&) const = 0;
-		
+
 		//! The same as before, but with evaluation on a vector of parameters
 		virtual std::vector<double>
 		curvature (std::vector<double> const&) const = 0;
