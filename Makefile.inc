@@ -37,7 +37,9 @@ export mkVtkLib   = /opt/local/lib
 # Path to Eigen includes
 export mkEigenInc = /opt/local/include/eigen3
 
-
+# Variable SONAME
+SONAME = install_name# For OSX
+#SONAME = soname# For Linux
 ### NOW DO NOT EDIT ANYTHING ###
 
 # Path to GetFEM library
