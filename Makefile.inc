@@ -9,13 +9,13 @@
 
 ### USER CONFIGURATION VARIABLES ###
 # Directory where the project resides.
-PROJECT_DIR =
+PROJECT_DIR = $(HOME)/Documents/PACS/Pacs_BGLgeom_Ilaria_Mattia
 
 # Installation path
-INSTALL_PATH =
+INSTALL_PATH = $(HOME)/opt/BGLgeom
 
 # Path to Boost Graph Library
-export mkBGLInc =
+export mkBGLInc = /opt/local/include
 
 # Path to GetFEM main folder
 export mkGetFEMHome =
@@ -24,18 +24,18 @@ export mkGetFEMHome =
 export mkMANworksHome =
 
 # Tolenrance on being zero (for comparison on points and segments)
-# This variable is needed when including point.hpp and intersections2D.hpp headers, 
-# and this happens for all tests in the library and in both applications. If you do 
+# This variable is needed when including point.hpp and intersections2D.hpp headers,
+# and this happens for all tests in the library and in both applications. If you do
 # not want to set this value, a default one is provided.
 TOL_VALUE = 1e-10
 
 ## EDIT THESE ONLY IF YOU DO NOT USE MODULE SYSTEM OF MOX CLUSTER ##
 # Path to VTK includes
-export mkVtkInc   = /u/geo2/sw/Toolchains/gcc+system/4.9/Packages/libs/vtk/5/include/vtk-5.10
+export mkVtkInc   = /opt/local/include/vtk-8.1
 # Path to VTK libraries
-export mkVtkLib   = /u/geo2/sw/Toolchains/gcc+system/4.9/Packages/libs/vtk/5/lib/vtk-5.10
+export mkVtkLib   = /opt/local/lib
 # Path to Eigen includes
-export mkEigenInc = /u/geo2/sw/Packages/libs/eigen/3/include/eigen3
+export mkEigenInc = /opt/local/include/eigen3
 
 
 ### NOW DO NOT EDIT ANYTHING ###
@@ -66,11 +66,13 @@ NETW_DIR    = $(PROJECT_DIR)/network_diffusion
 FRAC_DIR    = $(PROJECT_DIR)/fracture_intersection
 
 # Parsing vtk libraries. In the modules are present also libraries for Python. We filter them out
-VTK_LIBS1 = $(wildcard $(VTK_LIB_DIR)/libvtk*.so.5.10.1) #collecting all libraries
+#VTK_LIBS1 = $(wildcard $(VTK_LIB_DIR)/libvtk*.so.5.10.1) #collecting all libraries
+VTK_LIBS1 = $(wildcard $(VTK_LIB_DIR)/libvtk*-8.1.dylib) #collecting all libraries
 VTK_LIBS2 = $(notdir $(VTK_LIBS1))
 VTK_LIBS3 = $(basename $(basename $(basename $(basename $(VTK_LIBS2))))) #Discarding .so.5.10.1
 VTK_LIBS4 = $(foreach lib, $(VTK_LIBS3), $(if $(findstring Python, $(lib)),,$(lib)))
-VTK_LIBS  = $(VTK_LIBS4:lib%=%)
+VTK_LIBS5  = $(VTK_LIBS4:lib%=%)
+VTK_LIBS = vtkChartsCore-8.1  vtkCommonColor-8.1  vtkCommonComputationalGeometry-8.1  vtkCommonCore-8.1  vtkCommonDataModel-8.1  vtkCommonExecutionModel-8.1  vtkCommonMath-8.1  vtkCommonMisc-8.1  vtkCommonSystem-8.1  vtkCommonTransforms-8.1  vtkDICOMParser-8.1  vtkDomainsChemistry-8.1  vtkDomainsChemistryOpenGL2-8.1  vtkFiltersAMR-8.1  vtkFiltersCore-8.1  vtkFiltersExtraction-8.1  vtkFiltersFlowPaths-8.1  vtkFiltersGeneral-8.1  vtkFiltersGeneric-8.1  vtkFiltersGeometry-8.1  vtkFiltersHybrid-8.1  vtkFiltersHyperTree-8.1  vtkFiltersImaging-8.1  vtkFiltersModeling-8.1  vtkFiltersParallel-8.1  vtkFiltersParallelImaging-8.1  vtkFiltersPoints-8.1  vtkFiltersProgrammable-8.1  vtkFiltersSMP-8.1  vtkFiltersSelection-8.1  vtkFiltersSources-8.1  vtkFiltersStatistics-8.1  vtkFiltersTexture-8.1  vtkFiltersTopology-8.1  vtkFiltersVerdict-8.1  vtkGeovisCore-8.1  vtkIOAMR-8.1  vtkIOCore-8.1  vtkIOEnSight-8.1  vtkIOExodus-8.1  vtkIOExport-8.1  vtkIOExportOpenGL2-8.1  vtkIOGeometry-8.1  vtkIOImage-8.1  vtkIOImport-8.1  vtkIOInfovis-8.1  vtkIOLSDyna-8.1  vtkIOLegacy-8.1  vtkIOMINC-8.1  vtkIOMovie-8.1  vtkIONetCDF-8.1  vtkIOPLY-8.1  vtkIOParallel-8.1  vtkIOParallelXML-8.1  vtkIOSQL-8.1  vtkIOTecplotTable-8.1  vtkIOVideo-8.1  vtkIOXML-8.1  vtkIOXMLParser-8.1  vtkImagingColor-8.1  vtkImagingCore-8.1  vtkImagingFourier-8.1  vtkImagingGeneral-8.1  vtkImagingHybrid-8.1  vtkImagingMath-8.1  vtkImagingMorphological-8.1  vtkImagingSources-8.1  vtkImagingStatistics-8.1  vtkImagingStencil-8.1  vtkInfovisCore-8.1  vtkInfovisLayout-8.1  vtkInteractionImage-8.1  vtkInteractionStyle-8.1  vtkInteractionWidgets-8.1  vtkNetCDF-8.1  vtkParallelCore-8.1  vtkRenderingAnnotation-8.1  vtkRenderingContext2D-8.1  vtkRenderingContextOpenGL2-8.1  vtkRenderingCore-8.1  vtkRenderingFreeType-8.1  vtkRenderingGL2PSOpenGL2-8.1  vtkRenderingImage-8.1  vtkRenderingLOD-8.1  vtkRenderingLabel-8.1  vtkRenderingOpenGL2-8.1  vtkRenderingVolume-8.1  vtkRenderingVolumeOpenGL2-8.1  vtkViewsContext2D-8.1  vtkViewsCore-8.1  vtkViewsInfovis-8.1  vtkalglib-8.1  vtkexoIIc-8.1  vtkexpat-8.1  vtkfreetype-8.1  vtkgl2ps-8.1  vtkglew-8.1  vtkhdf5-8.1  vtkhdf5_hl-8.1  vtkjpeg-8.1  vtkjsoncpp-8.1  vtklibharu-8.1  vtklibxml2-8.1  vtklz4-8.1  vtkmetaio-8.1  vtknetcdfcpp-8.1  vtkoggtheora-8.1  vtkpng-8.1  vtkproj4-8.1  vtksqlite-8.1  vtksys-8.1  vtktiff-8.1  vtkverdict-8.1  vtkzlib-8.1
 ## Libraries needed to the linker
 # For all code
 LDLIBS = -L$(VTK_LIB_DIR) $(foreach lib, $(VTK_LIBS), -l$(lib))
@@ -108,4 +110,3 @@ WARNS = -Wall -Wno-deprecated
 
 export CPPFLAGS = $(DEFINES) $(INCLUDES)
 export CXXFLAGS = $(STDFLAG) $(WARNS) $(OPT)
-
